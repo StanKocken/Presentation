@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Presentation Sample</string>
+    <string name="save_value_label">Saved version:</string>
+    <string name="save_button_label">Save</string>
+</resources>
