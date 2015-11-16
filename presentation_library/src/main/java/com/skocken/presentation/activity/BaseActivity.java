@@ -74,9 +74,13 @@ public abstract class BaseActivity extends Activity {
         }
     }
 
+    protected void setPresenter(BasePresenter presenter) {
+        mWeakReferencePresenter = new WeakReference<>(presenter);
+    }
+
     void initPresenter(Bundle savedInstanceState) {
         BasePresenter presenter = newPresenter();
-        mWeakReferencePresenter = new WeakReference<>(presenter);
+        setPresenter(presenter);
         if (presenter != null) {
             // because the first onCreate won't be call otherwise (creation too late)
             presenter.onCreate(savedInstanceState);
