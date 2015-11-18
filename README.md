@@ -72,7 +72,7 @@ Nothing special needed.
 ## Gradle
 
     dependencies {
-        compile 'com.skocken:presentation:0.1'
+        compile 'com.skocken:presentation:1.0.0'
     }
 
 
