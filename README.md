@@ -61,7 +61,7 @@ Then you have your:
 
 ### Presenter into an Adapter
 
-This library has a dependency to [Efficient Adapter](https://github.com/EfficientAdapter/) to use the same view cache mechanism.
+This library has a dependency to [Efficient Adapter](https://github.com/StanKocken/EfficientAdapter) to use the same view cache mechanism.
 
 This allow to apply the Presentation pattern to object into an `Adapter` as well. Your `ViewHolder` should extends `PresenterViewHolder` and your `Presenter` extends `BaseItemPresenter`.
 
