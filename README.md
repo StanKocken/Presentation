@@ -4,23 +4,23 @@ An architecture for Android as a replacement of MVC.
 
 ## Why should I use Presentation?
 
-Because you want to have a more readable, testable code.
+Because you want to have more readable, testable code.
 
-Avoid "God Object", mainly your Activities or Fragments.
+Avoid "God Objects", mainly your Activities or Fragments.
 
 ## How does it work?
 
 Separation of responsibilities by module:
-- `Presenter`: get Business Object from the DataProvider and give instructions to the ViewProxy
-- `DataProvider`: communicate with "outside" to set and get the data, following the instructions of the Presenter
-- `ViewProxy`: convert Presenter instructions and set values to Android Views.
+- `Presenter`: Get a Business Object from the DataProvider and give instructions to the ViewProxy
+- `DataProvider`: Communicate with the "outside" to set and get the data, following the instructions of the Presenter
+- `ViewProxy`: Convert Presenter instructions and set values to Android Views.
 
 ## Architecture
 
 <img src="https://raw.githubusercontent.com/StanKocken/Presentation/master/img_references.png" style="width: 300px;"/>
 
 Leak safe.
-Don't hold with a strong reference any of the `DataProvider`, `Presenter` or `ViewProxy`.
+Don't hold a strong reference to the `DataProvider`, `Presenter`, or `ViewProxy`.
 
 ## Sample
 
@@ -52,18 +52,18 @@ Each public method of the modules are defined into an interface:
     }
 
 Then you have your:
-- `FormPresenter` that extends `BasePresenter` and implement this `FormDef.IPresenter`
-- `FormViewProxy` that extends `BaseDataProvider` and implement this `FormDef.IDataProvider`
-- `FormDataProvider` that extends `BaseViewProxy` and implement this `FormDef.IView`
+- `FormPresenter` that extends `BasePresenter` and implements `FormDef.IPresenter`
+- `FormDataProvider` that extends `BaseDataProvider` and implements `FormDef.IDataProvider`
+- `FormViewProxy` that extends `BaseViewProxy` and implements `FormDef.IView`
 
 
 ## Go further
 
 ### Presenter into an Adapter
 
-This library has a dependency to [Efficient Adapter](https://github.com/StanKocken/EfficientAdapter) to use the same view cache mechanism.
+This library has a dependency on [Efficient Adapter](https://github.com/StanKocken/EfficientAdapter) to use the same view cache mechanism.
 
-This allow to apply the Presentation pattern to object into an `Adapter` as well. Your `ViewHolder` should extends `PresenterViewHolder` and your `Presenter` extends `BaseItemPresenter`.
+This allows to apply the Presentation pattern to object in an `Adapter` as well. Your `ViewHolder` should extend `PresenterViewHolder` and your `Presenter` should extend `BaseItemPresenter`.
 
 ## Proguard
 
@@ -71,10 +71,11 @@ Nothing special needed.
 
 ## Gradle
 
-    dependencies {
-        compile 'com.skocken:presentation:1.0.0'
-    }
-
+```
+dependencies {
+    compile 'com.skocken:presentation:1.0.0'
+}
+```
 
 ## License
 
