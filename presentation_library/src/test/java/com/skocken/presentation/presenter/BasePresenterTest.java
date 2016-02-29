@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.ContextWrapper;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
@@ -117,6 +118,19 @@ public class BasePresenterTest extends TestCase {
         TestPresenter presenter = new TestPresenter(null, null);
         assertNull(presenter.getContext());
         assertNull(presenter.getActivity());
+    }
+
+    @Test
+    public void testShouldReturnActivityFromContextWrapper() {
+        ContextWrapper contextWrapper = Mockito.mock(ContextWrapper.class);
+        Activity activity = Mockito.mock(Activity.class);
+        TestDef.IView view = Mockito.mock(TestDef.IView.class);
+        when(view.getContext()).thenReturn(contextWrapper);
+        when(contextWrapper.getBaseContext()).thenReturn(activity);
+
+        TestPresenter presenter = new TestPresenter(null, view);
+        assertEquals(contextWrapper, presenter.getContext());
+        assertEquals(activity, presenter.getActivity());
     }
 
     @Test

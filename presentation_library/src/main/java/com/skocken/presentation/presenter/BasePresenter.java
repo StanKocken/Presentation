@@ -6,6 +6,7 @@ import com.skocken.presentation.util.ActivityLifecycleCallbackDelegate;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -51,11 +52,15 @@ public abstract class BasePresenter<P extends Base.IDataProvider, V extends Base
     @Override
     public Activity getActivity() {
         Context context = getContext();
-        if (context instanceof Activity) {
-            return (Activity) context;
-        } else {
-            return null;
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                return (Activity)context;
+            }
+            // get the base activity and loop.
+            // fix to get Activity from android.support.v7.app.MediaRouteButton#getActivity()
+            context = ((ContextWrapper)context).getBaseContext();
         }
+        return null;
     }
 
     @Override
