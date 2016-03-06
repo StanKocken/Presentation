@@ -14,8 +14,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import java.lang.ref.WeakReference;
+
 public abstract class BasePresenter<P extends Base.IDataProvider, V extends Base.IView>
         implements Base.IPresenter, ActivityLifeCycleListener {
+
+    private WeakReference<ActivityLifecycleCallbackDelegate> mActivityLifecycleCallbackDelegate;
 
     private final P mProvider;
 
@@ -121,7 +125,14 @@ public abstract class BasePresenter<P extends Base.IDataProvider, V extends Base
 
     @Override
     public void onDestroy() {
-        // nothing to do by default
+        if (mActivityLifecycleCallbackDelegate != null) {
+            ActivityLifecycleCallbackDelegate activityLifecycleCallbackDelegate =
+                    mActivityLifecycleCallbackDelegate.get();
+            if (activityLifecycleCallbackDelegate != null) {
+                activityLifecycleCallbackDelegate.release();
+            }
+            mActivityLifecycleCallbackDelegate = null;
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -141,7 +152,8 @@ public abstract class BasePresenter<P extends Base.IDataProvider, V extends Base
     protected void subscribeLifeCycle() {
         Activity activity = getActivity();
         if (activity != null) {
-            ActivityLifecycleCallbackDelegate.track(activity, this);
+            mActivityLifecycleCallbackDelegate =
+                    new WeakReference<>(ActivityLifecycleCallbackDelegate.track(activity, this));
         }
     }
 
