@@ -22,12 +22,12 @@ public class ActivityLifecycleCallbackDelegate implements Application.ActivityLi
         }
     }
 
-    public static void track(Activity activity, ActivityLifeCycleListener listener) {
+    public static ActivityLifecycleCallbackDelegate track(Activity activity, ActivityLifeCycleListener listener) {
         if (activity == null || listener == null) {
             // impossible to track the activity
-            return;
+            return null;
         }
-        new ActivityLifecycleCallbackDelegate(activity, listener);
+        return new ActivityLifecycleCallbackDelegate(activity, listener);
     }
 
     public void release() {
