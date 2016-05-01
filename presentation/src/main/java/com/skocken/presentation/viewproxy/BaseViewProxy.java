@@ -61,35 +61,35 @@ public abstract class BaseViewProxy<P extends Base.IPresenter> implements Base.I
     }
 
     /**
-     * Helper for {@link EfficientCacheView#clearViewsCached()}
+     * Helper for EfficientCacheView#clearViewsCached()
      */
     public void clearViewsCached() {
         mCacheView.clearViewsCached();
     }
 
     /**
-     * Helper for {@link EfficientCacheView#clearViewCached(int)}
+     * Helper for EfficientCacheView#clearViewCached(int)}
      */
     public void clearViewCached(int viewId) {
         mCacheView.clearViewCached(viewId);
     }
 
     /**
-     * Helper for {@link EfficientCacheView#clearViewCached(int, int)}
+     * Helper for EfficientCacheView#clearViewCached(int, int)
      */
     public void clearViewCached(int parentId, int viewId) {
         mCacheView.clearViewCached(parentId, viewId);
     }
 
     /**
-     * Helper for {@link EfficientCacheView#findViewByIdEfficient(int)}
+     * Helper for EfficientCacheView#findViewByIdEfficient(int)}
      */
     public <T extends View> T findViewByIdEfficient(int id) {
         return mCacheView.findViewByIdEfficient(id);
     }
 
     /**
-     * Helper for {@link EfficientCacheView#findViewByIdEfficient(int, int)}
+     * Helper for EfficientCacheView#findViewByIdEfficient(int, int)
      */
     public <T extends View> T findViewByIdEfficient(int parentId, int id) {
         return mCacheView.findViewByIdEfficient(parentId, id);
