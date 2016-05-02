@@ -32,7 +32,7 @@ dependencies {
 
     // dependencies
     compile 'com.android.support:appcompat-v7:' + ANDROID_SUPPORT_VERSION
-    compile 'com.skocken:efficientadapter:2.0.2'
+    compile 'com.skocken:efficientadapter:2.1.0'
 }
 
 apply from: '../gradle_script/installv1.gradle'
