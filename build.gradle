@@ -13,6 +13,7 @@ ext {
     MOCKITO_VERSION = "1.10.19"
     ROBOLECTRIC_VERSION = "3.0"
     ANDROID_SUPPORT_VERSION = "26.0.0-beta2"
+    ANDROID_ARCH_LIFECYCLE_VERSION = "1.0.0-alpha3"
 }
 
 buildscript {

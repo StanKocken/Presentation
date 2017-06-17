@@ -8,6 +8,8 @@ public interface Base {
 
     interface IPresenter {
 
+        void setView(Base.IView view);
+
         Activity getActivity();
 
         Context getContext();
@@ -22,7 +24,7 @@ public interface Base {
 
     interface IDataProvider {
 
-        void setPresenter(IPresenter pvBasePresenter);
+        void setPresenter(Base.IPresenter presenter);
     }
 
     interface IView {
@@ -31,7 +33,7 @@ public interface Base {
 
         Resources getResources();
 
-        void setPresenter(IPresenter pvBasePresenter);
+        void setPresenter(Base.IPresenter presenter);
     }
 
     interface IItemView<T> extends IView {

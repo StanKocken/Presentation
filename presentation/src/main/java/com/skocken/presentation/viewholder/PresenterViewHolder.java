@@ -1,21 +1,20 @@
 package com.skocken.presentation.viewholder;
 
+import android.content.Context;
+import android.view.View;
+
 import com.skocken.efficientadapter.lib.viewholder.EfficientViewHolder;
 import com.skocken.presentation.definition.Base;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.view.View;
-
 public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
-        extends EfficientViewHolder<T> implements Base.IView {
+        extends EfficientViewHolder<T> implements Base.IItemView<T> {
 
     private P mPresenter;
 
     public PresenterViewHolder(View itemView) {
         super(itemView);
         initController();
-        setPresenter(createBaseItemPresenter());
+        createItemPresenter();
     }
 
     @Override
@@ -27,8 +26,7 @@ public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
         // nothing to do by default
     }
 
-    @NonNull
-    protected abstract P createBaseItemPresenter();
+    protected abstract Class<P> getPresenterClass();
 
     protected P getPresenter() {
         return mPresenter;
@@ -39,4 +37,16 @@ public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
         mPresenter.updateView(context, object);
     }
 
+    private void createItemPresenter() {
+        P presenter;
+        try {
+            presenter = getPresenterClass().newInstance();
+        } catch (InstantiationException e) {
+            throw new IllegalStateException("");
+        } catch (IllegalAccessException e) {
+            throw new IllegalStateException("");
+        }
+        presenter.setView(this);
+        setPresenter(presenter);
+    }
 }

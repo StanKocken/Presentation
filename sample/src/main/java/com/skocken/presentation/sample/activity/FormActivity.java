@@ -1,14 +1,11 @@
 package com.skocken.presentation.sample.activity;
 
-import com.skocken.presentation.activity.BaseAppCompatActivity;
-import com.skocken.presentation.presenter.BasePresenter;
+import com.skocken.presentation.activity.BaseActivity;
 import com.skocken.presentation.sample.R;
-import com.skocken.presentation.sample.definition.FormDef;
 import com.skocken.presentation.sample.presenter.FormPresenter;
-import com.skocken.presentation.sample.provider.FormDataProvider;
 import com.skocken.presentation.sample.viewproxy.FormViewProxy;
 
-public class FormActivity extends BaseAppCompatActivity {
+public class FormActivity extends BaseActivity<FormPresenter, FormViewProxy> {
 
     @Override
     protected int getContentView() {
@@ -16,9 +13,12 @@ public class FormActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected BasePresenter newPresenter() {
-        FormDef.IDataProvider provider = new FormDataProvider();
-        FormDef.IView view = new FormViewProxy(this);
-        return new FormPresenter(provider, view);
+    protected Class<FormPresenter> getPresenterClass() {
+        return FormPresenter.class;
+    }
+
+    @Override
+    protected FormViewProxy newViewProxy() {
+        return new FormViewProxy(this);
     }
 }

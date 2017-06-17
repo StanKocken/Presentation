@@ -2,21 +2,20 @@ package com.skocken.presentation.sample.presenter;
 
 import com.skocken.presentation.presenter.BasePresenter;
 import com.skocken.presentation.sample.definition.FormDef;
-
-import android.os.Bundle;
+import com.skocken.presentation.sample.provider.FormDataProvider;
 
 public class FormPresenter
         extends BasePresenter<FormDef.IDataProvider, FormDef.IView>
         implements FormDef.IPresenter {
 
-    public FormPresenter(FormDef.IDataProvider provider, FormDef.IView view) {
-        super(provider, view);
+    public FormPresenter() {
+        super();
+        setProvider(new FormDataProvider());
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    protected void onViewChanged() {
+        super.onViewChanged();
         refreshValueSaved();
     }
 
