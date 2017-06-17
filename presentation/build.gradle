@@ -26,13 +26,15 @@ android {
 
 dependencies {
     // tests
-    testCompile 'junit:junit:' + JUNIT_VERSION
-    testCompile 'org.mockito:mockito-core:' + MOCKITO_VERSION
-    testCompile "org.robolectric:robolectric:" + ROBOLECTRIC_VERSION
+    testCompile "junit:junit:${JUNIT_VERSION}"
+    testCompile "org.mockito:mockito-core:${ MOCKITO_VERSION}"
+    testCompile "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
 
     // dependencies
-    compile 'com.android.support:appcompat-v7:' + ANDROID_SUPPORT_VERSION
-    compile 'com.skocken:efficientadapter:2.1.0'
+    compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
+    compile ("com.skocken:efficientadapter:2.2.1") {
+        exclude group: 'com.android.support'
+    }
 }
 
 apply from: '../gradle_script/installv1.gradle'
