@@ -2,15 +2,15 @@
           package="com.skocken.presentation.sample">
 
     <application
-            android:allowBackup="true"
-            android:label="@string/app_name"
-            android:icon="@mipmap/ic_launcher"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
         <activity
-                android:name=".activity.FormActivity"
-                android:label="@string/app_name">
+            android:name=".activity.FormActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -18,6 +18,9 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.FormWithFragmentActivity"/>
     </application>
 
 </manifest>

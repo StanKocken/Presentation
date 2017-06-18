@@ -7,6 +7,12 @@ public interface FormDef {
     interface IPresenter extends Base.IPresenter {
 
         void onClickSaveButton(String value);
+
+        void onClickGoFormActivity();
+
+        void onClickGoFormFragmentActivity();
+
+        void onClickGoFormDialogFragment();
     }
 
     interface IDataProvider extends Base.IDataProvider {

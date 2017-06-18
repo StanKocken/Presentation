@@ -2,4 +2,7 @@
     <string name="app_name">Presentation Sample</string>
     <string name="save_value_label">Saved version:</string>
     <string name="save_button_label">Save</string>
+    <string name="go_to_form_activity">Go to Form Activity</string>
+    <string name="go_to_form_fragment_activity">Go to Form Fragment Activity</string>
+    <string name="go_to_form_dialog_fragment">Go to Form Dialog Fragment</string>
 </resources>
