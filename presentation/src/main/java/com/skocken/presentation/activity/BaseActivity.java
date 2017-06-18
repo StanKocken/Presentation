@@ -9,6 +9,13 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+/**
+ * Base of the link between an Activity and the MVP of this library.
+ * <p>
+ * Note:
+ * You don't have to use this BaseActivity if your activity already extends something else.
+ * In this case, take this class as an example.
+ */
 public abstract class BaseActivity
         <P extends BasePresenter, V extends Base.IView>
         extends AppCompatActivity implements LifecycleRegistryOwner {

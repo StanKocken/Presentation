@@ -1,31 +1,61 @@
 package com.skocken.presentation.viewproxy;
 
+import android.app.Activity;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
+import android.content.Context;
+import android.content.res.Resources;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.view.View;
+
 import com.skocken.efficientadapter.lib.util.EfficientCacheView;
 import com.skocken.presentation.R;
 import com.skocken.presentation.definition.Base;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.res.Resources;
-import android.support.annotation.NonNull;
-import android.view.View;
-
-public abstract class BaseViewProxy<P extends Base.IPresenter> implements Base.IView {
+/**
+ * Base of BaseViewProxy which take care of keeping the Presenter for you.
+ * <p>
+ * It will also provide an EfficientCacheView, which keep reference to your view, so you don't have
+ * to store them yourself.
+ *
+ * @param <P> the Presenter class that you want to use
+ */
+public abstract class BaseViewProxy<P extends Base.IPresenter>
+        implements Base.IView, Base.LifecycleProvider {
 
     private final EfficientCacheView mCacheView;
 
     private P mPresenter;
 
+    private Lifecycle mLifecycle;
+
     public BaseViewProxy(Activity activity) {
         this(activity.findViewById(android.R.id.content));
+        setLifecycleFrom(activity);
+    }
+
+    public BaseViewProxy(Fragment fragment) {
+        this(fragment.getView());
+        setLifecycleFrom(fragment);
     }
 
     public BaseViewProxy(View rootView) {
         mCacheView = createCacheView(rootView);
 
+        // the view keep a reference on the view proxy
         rootView.setTag(R.id.tag_view_proxy, this);
 
         onInit();
+    }
+
+    @Override
+    public Lifecycle getLifecycle() {
+        return mLifecycle;
+    }
+
+    public void setLifecycle(Lifecycle lifecycle) {
+        mLifecycle = lifecycle;
     }
 
     @NonNull
@@ -93,6 +123,16 @@ public abstract class BaseViewProxy<P extends Base.IPresenter> implements Base.I
      */
     public <T extends View> T findViewByIdEfficient(int parentId, int id) {
         return mCacheView.findViewByIdEfficient(parentId, id);
+    }
+
+    private void setLifecycleFrom(Object object) {
+        if (object instanceof Lifecycle) {
+            setLifecycle((Lifecycle) object);
+        } else if (object instanceof LifecycleOwner) {
+            setLifecycle(((LifecycleOwner) object).getLifecycle());
+        } else {
+            setLifecycle(null);
+        }
     }
 
 }

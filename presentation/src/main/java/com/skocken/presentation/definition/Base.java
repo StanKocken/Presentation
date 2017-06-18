@@ -1,6 +1,7 @@
 package com.skocken.presentation.definition;
 
 import android.app.Activity;
+import android.arch.lifecycle.Lifecycle;
 import android.content.Context;
 import android.content.res.Resources;
 
@@ -41,5 +42,9 @@ public interface Base {
         T getObject();
 
         int getPosition();
+    }
+
+    interface LifecycleProvider {
+        Lifecycle getLifecycle();
     }
 }

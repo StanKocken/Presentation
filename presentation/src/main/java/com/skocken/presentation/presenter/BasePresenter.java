@@ -3,7 +3,6 @@ package com.skocken.presentation.presenter;
 import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
@@ -14,6 +13,15 @@ import android.support.annotation.Nullable;
 
 import com.skocken.presentation.definition.Base;
 
+/**
+ * Base of a Presenter. It is an implementation of Base.IPresenter which take cares of the
+ * boiler-plate and do more for you:
+ * - this class supports extends ViewModel to be used with the Android Components
+ * - if your Presenter, which extends this BasePresenter also implements LifecycleObserver, then
+ * it will automatically register/unregister to the lifecycle
+ * <p>
+ * Note: you don't have to use this BasePresenter, but it will help you
+ */
 public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base.IView>
         extends ViewModel
         implements Base.IPresenter {
@@ -107,9 +115,8 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
     }
 
     protected Lifecycle getLifecycle() {
-        Activity activity = getActivity();
-        if (activity instanceof LifecycleRegistryOwner) {
-            return ((LifecycleRegistryOwner) activity).getLifecycle();
+        if (mView instanceof Base.LifecycleProvider) {
+            return ((Base.LifecycleProvider) mView).getLifecycle();
         } else {
             return null;
         }
