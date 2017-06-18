@@ -1,6 +1,21 @@
 Change Log
 ===============================================================================
 
+Version 2.0.0-alpha3 *(2016-05-01)*
+
+ * Re-write the management of the lifecycle, using `android.arch.lifecycle` from  [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html)
+ * Use `android.arch.lifecycle` version `1.0.0-alpha3`
+ * Added support for Fragment (and DialogFragment)
+ * Your `Presenter` now supports configuration changes! Thanks to Android `ViewModel`.
+ * `BasePresenter` does not take a `Base.IView` and `Base.IDataProvider` within the constructor anymore. You need to provide them after, with the setters.
+
+ Breaking changes:
+ * You *must* provide an empty public constructor for your Presenter.
+ * *BasePresenter* does not include the methods `onResume`, `onStart`… anymore. Use the annotation `@OnLifecycleEvent` and implements `LifecycleObserver` instead.
+ * Other custom methods from *BasePresenter*, like `onCreateOptionsMenu`, `onOptionsItemSelected`…, are just removed. It created confusions and cannot work in any cases (like if using a Presenter with a View and not an Activity).
+
+----------------------------
+
 Version 1.0.2 *(2016-05-01)*
 
  * Update dependencies

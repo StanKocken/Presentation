@@ -17,7 +17,7 @@ Separation of responsibilities by module:
 
 ## Architecture
 
-<img src="https://raw.githubusercontent.com/StanKocken/Presentation/master/img_references.png" style="width: 300px;"/>
+<img src="https://raw.githubusercontent.com/StanKocken/Presentation/master/img_references.png" />
 
 Leak safe.
 Don't hold a strong reference to the `DataProvider`, `Presenter`, or `ViewProxy`.
@@ -26,7 +26,7 @@ Don't hold a strong reference to the `DataProvider`, `Presenter`, or `ViewProxy`
 
 The goal is to make this application:
 
-<img src="https://raw.githubusercontent.com/StanKocken/Presentation/master/sample_screenshot.png" style="width: 300px;"/>
+<img src="https://raw.githubusercontent.com/StanKocken/Presentation/master/sample_screenshot.png" />
 
 Each public method of the modules are defined into an interface:
 
@@ -64,6 +64,28 @@ Then you have your:
 This library has a dependency on [Efficient Adapter](https://github.com/StanKocken/EfficientAdapter) to use the same view cache mechanism.
 
 This allows to apply the Presentation pattern to object in an `Adapter` as well. Your `ViewHolder` should extend `PresenterViewHolder` and your `Presenter` should extend `BaseItemPresenter`.
+
+### Let your Presenter by Lifecycle aware
+
+Thanks to the [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html), your `Presenter` can be aware of the lifecycle of the linked Activity or Fragment.
+
+It will be automatically registered/unregistered if your `Presenter` implements `LifecycleObserver`, if it extends `BasePresenter`.
+
+Then you can add the annotation `@OnLifecycleEvent` for the state you want to listen.
+
+Example:
+
+    public class MyPresenter extends BasePresenter<MyDef.IDataProvider, MyDef.IView>
+            implements MyDef.IPresenter, LifecycleObserver {
+
+        ...
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_START)
+        void onStart() {
+            // do whatever when the
+        }
+
+    }
 
 ## Proguard
 
