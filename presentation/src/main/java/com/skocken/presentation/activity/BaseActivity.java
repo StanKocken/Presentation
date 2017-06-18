@@ -3,13 +3,17 @@ package com.skocken.presentation.activity;
 import com.skocken.presentation.definition.Base;
 import com.skocken.presentation.presenter.BasePresenter;
 
+import android.arch.lifecycle.LifecycleRegistry;
+import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 public abstract class BaseActivity
         <P extends BasePresenter, V extends Base.IView>
-        extends AppCompatActivity {
+        extends AppCompatActivity implements LifecycleRegistryOwner {
+
+    private final LifecycleRegistry mRegistry = new LifecycleRegistry(this);
 
     private P mPresenter;
 
@@ -27,6 +31,11 @@ public abstract class BaseActivity
         mPresenter = ViewModelProviders.of(this)
                 .get(getPresenterClass());
         initPresenter(mPresenter, savedInstanceState);
+    }
+
+    @Override
+    public LifecycleRegistry getLifecycle() {
+        return mRegistry;
     }
 
     public P getPresenter() {
