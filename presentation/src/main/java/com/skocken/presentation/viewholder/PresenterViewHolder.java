@@ -44,14 +44,19 @@ public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
     }
 
     private void createItemPresenter() {
-        P presenter;
-        try {
-            presenter = getPresenterClass().newInstance();
-        } catch (Exception e) {
-            throw new IllegalStateException(
-                    "Impossible to create the Presenter, no public constructor?");
-        }
+        P presenter = createPresenter(getPresenterClass());
         presenter.setView(this);
         setPresenter(presenter);
+    }
+
+    private P createPresenter(Class<P> modelClass) {
+        //noinspection TryWithIdenticalCatches
+        try {
+            return modelClass.newInstance();
+        } catch (InstantiationException e) {
+            throw new RuntimeException("Cannot create an instance of " + modelClass, e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Cannot create an instance of " + modelClass, e);
+        }
     }
 }
