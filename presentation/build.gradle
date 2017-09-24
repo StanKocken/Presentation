@@ -30,7 +30,6 @@ dependencies {
     testCompile "org.mockito:mockito-core:${ MOCKITO_VERSION}"
     testCompile "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
 
-    compile "android.arch.lifecycle:runtime:${ANDROID_ARCH_LIFECYCLE_VERSION}"
     compile "android.arch.lifecycle:extensions:${ANDROID_ARCH_LIFECYCLE_VERSION}"
     annotationProcessor "android.arch.lifecycle:compiler:${ANDROID_ARCH_LIFECYCLE_VERSION}"
 

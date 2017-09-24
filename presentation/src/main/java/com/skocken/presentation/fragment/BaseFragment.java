@@ -1,9 +1,7 @@
 package com.skocken.presentation.fragment;
 
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.LifecycleRegistryOwner;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.skocken.presentation.definition.Base;
 import com.skocken.presentation.presenter.BasePresenter;
+import com.skocken.presentation.util.PresenterOwner;
 
 /**
  * Base of the link between a Fragment and the MVP of this library.
@@ -21,24 +20,18 @@ import com.skocken.presentation.presenter.BasePresenter;
  * In this case, take this class as an example.
  */
 public abstract class BaseFragment<P extends BasePresenter, V extends Base.IView>
-        extends Fragment implements LifecycleRegistryOwner {
+        extends Fragment
+        implements PresenterOwner.Provider<P, V> {
 
-    private final LifecycleRegistry mRegistry = new LifecycleRegistry(this);
-
-    private P mPresenter;
-
-    protected abstract int getContentView();
-
-    protected abstract Class<P> getPresenterClass();
-
-    protected abstract V newViewProxy();
+    PresenterOwner<P, V> mPresenterOwner;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mPresenter = ViewModelProviders.of(this)
-                .get(getPresenterClass());
+        if (mPresenterOwner == null) {
+            mPresenterOwner = new PresenterOwner<>(this);
+        }
+        onCreateDelegate();
     }
 
     @Nullable
@@ -51,20 +44,19 @@ public abstract class BaseFragment<P extends BasePresenter, V extends Base.IView
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initPresenter(mPresenter, savedInstanceState);
+        onViewCreatedDelegate(savedInstanceState);
     }
 
-    @Override
-    public LifecycleRegistry getLifecycle() {
-        return mRegistry;
-    }
-
+    @Nullable
     public P getPresenter() {
-        return mPresenter;
+        return mPresenterOwner.getPresenter();
     }
 
-    protected void initPresenter(P presenter, Bundle savedInstanceState) {
-        // set the ViewProxy
-        presenter.setView(newViewProxy());
+    void onCreateDelegate() {
+        mPresenterOwner.createPresenter();
+    }
+
+    void onViewCreatedDelegate(@Nullable Bundle savedInstanceState) {
+        mPresenterOwner.initViewProxy(savedInstanceState);
     }
 }

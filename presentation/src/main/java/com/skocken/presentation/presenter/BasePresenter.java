@@ -29,8 +29,6 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
     private D mProvider;
     private V mView;
 
-    private AutoRemoveLifecycleObserver mAutoRemoveLifecycleObserver;
-
     public BasePresenter() {
     }
 
@@ -54,28 +52,7 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
         if (mView != null) {
             mView.setPresenter(this);
         }
-        registerLifecycleIfNeeded();
         onViewChanged();
-    }
-
-    private void registerLifecycleIfNeeded() {
-        Lifecycle newLifecycle = getLifecycle();
-        if (mAutoRemoveLifecycleObserver != null
-                && mAutoRemoveLifecycleObserver.sameLifecycle(newLifecycle)) {
-            return; // already registered
-        }
-
-        if (mAutoRemoveLifecycleObserver != null) {
-            // remove previous observer
-            mAutoRemoveLifecycleObserver.cleanup();
-            mAutoRemoveLifecycleObserver = null;
-        }
-
-        if (newLifecycle == null || !(this instanceof LifecycleObserver)) {
-            return; // no registration to do
-        }
-        mAutoRemoveLifecycleObserver =
-                AutoRemoveLifecycleObserver.register(newLifecycle, (LifecycleObserver) this);
     }
 
     @Override
@@ -114,24 +91,6 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
         }
     }
 
-    protected Lifecycle getLifecycle() {
-        if (mView instanceof Base.LifecycleProvider) {
-            return ((Base.LifecycleProvider) mView).getLifecycle();
-        } else {
-            return null;
-        }
-    }
-
-    @Nullable
-    protected Lifecycle.State getLifecycleState() {
-        Lifecycle lifecycle = getLifecycle();
-        if (lifecycle == null) {
-            return null;
-        } else {
-            return lifecycle.getCurrentState();
-        }
-    }
-
     protected D getProvider() {
         return mProvider;
     }
@@ -146,39 +105,5 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
 
     protected void onProviderChanged() {
         // nothing by default
-    }
-
-    static class AutoRemoveLifecycleObserver implements LifecycleObserver {
-        private final LifecycleObserver mObserver;
-        private Lifecycle mLifecycle;
-
-        private AutoRemoveLifecycleObserver(@NonNull Lifecycle lifecycle,
-                                            @NonNull LifecycleObserver observer) {
-            mLifecycle = lifecycle;
-            mObserver = observer;
-        }
-
-        private static AutoRemoveLifecycleObserver register(@NonNull Lifecycle lifecycle,
-                                                            @NonNull LifecycleObserver observer) {
-            lifecycle.addObserver(observer);
-
-            AutoRemoveLifecycleObserver instance =
-                    new AutoRemoveLifecycleObserver(lifecycle, observer);
-            lifecycle.addObserver(instance); // auto-register, so we can auto-cancel
-            return instance;
-        }
-
-        private boolean sameLifecycle(Lifecycle lifecycle) {
-            return mLifecycle == lifecycle;
-        }
-
-        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-        void cleanup() {
-            if (mLifecycle == null) {
-                return; // already cleanup
-            }
-            mLifecycle.removeObserver(mObserver);
-            mLifecycle.removeObserver(this);
-        }
     }
 }

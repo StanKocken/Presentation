@@ -1,6 +1,13 @@
 Change Log
 ===============================================================================
 
+Version 2.0.0-beta1 *(2016-10-01)*
+
+* Remove lifecycle management from the library. Because the MVP can be attached as well to a View, it didn't make test to keep it.
+* Update ViewModel to "1.0.0-beta1" with Support Library "26.1.0"
+
+----------------------------
+
 Version 2.0.0-alpha3 *(2016-05-01)*
 
  * Re-write the management of the lifecycle, using `android.arch.lifecycle` from  [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html)

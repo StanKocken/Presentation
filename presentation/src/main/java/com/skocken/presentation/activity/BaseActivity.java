@@ -1,13 +1,12 @@
 package com.skocken.presentation.activity;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+
 import com.skocken.presentation.definition.Base;
 import com.skocken.presentation.presenter.BasePresenter;
-
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.LifecycleRegistryOwner;
-import android.arch.lifecycle.ViewModelProviders;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.skocken.presentation.util.PresenterOwner;
 
 /**
  * Base of the link between an Activity and the MVP of this library.
@@ -16,41 +15,29 @@ import android.support.v7.app.AppCompatActivity;
  * You don't have to use this BaseActivity if your activity already extends something else.
  * In this case, take this class as an example.
  */
-public abstract class BaseActivity
-        <P extends BasePresenter, V extends Base.IView>
-        extends AppCompatActivity implements LifecycleRegistryOwner {
+public abstract class BaseActivity<P extends BasePresenter, V extends Base.IView>
+        extends AppCompatActivity
+        implements PresenterOwner.Provider<P, V> {
 
-    private final LifecycleRegistry mRegistry = new LifecycleRegistry(this);
-
-    private P mPresenter;
-
-    protected abstract int getContentView();
-
-    protected abstract Class<P> getPresenterClass();
-
-    protected abstract V newViewProxy();
+    PresenterOwner<P, V> mPresenterOwner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentView());
-
-        mPresenter = ViewModelProviders.of(this)
-                .get(getPresenterClass());
-        initPresenter(mPresenter, savedInstanceState);
+        if (mPresenterOwner == null) {
+            mPresenterOwner = new PresenterOwner<>(this);
+        }
+        onCreateDelegate(savedInstanceState);
     }
 
-    @Override
-    public LifecycleRegistry getLifecycle() {
-        return mRegistry;
-    }
-
+    @Nullable
     public P getPresenter() {
-        return mPresenter;
+        return mPresenterOwner.getPresenter();
     }
 
-    protected void initPresenter(P presenter, Bundle savedInstanceState) {
-        // set the ViewProxy
-        presenter.setView(newViewProxy());
+    void onCreateDelegate(Bundle savedInstanceState) {
+        setContentView(getContentView());
+        mPresenterOwner.createPresenter();
+        mPresenterOwner.initViewProxy(savedInstanceState);
     }
 }
