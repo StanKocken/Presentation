@@ -13,7 +13,8 @@ public class BaseItemPresenterTest extends TestCase {
     @Test
     public void testShouldKeepItemViewProxy() {
         TestItemDef.IItemView view = Mockito.mock(TestItemDef.IItemView.class);
-        TestPresenter presenter = new TestPresenter(null, view);
+        TestPresenter presenter = new TestPresenter();
+        presenter.setView(view);
 
         assertEquals(view, presenter.getView());
     }
@@ -21,9 +22,5 @@ public class BaseItemPresenterTest extends TestCase {
     private static class TestPresenter
             extends BaseItemPresenter<TestDef.IDataProvider, TestItemDef.IItemView>
             implements TestDef.IPresenter {
-
-        public TestPresenter(TestDef.IDataProvider provider, TestItemDef.IItemView view) {
-            super(provider, view);
-        }
     }
 }

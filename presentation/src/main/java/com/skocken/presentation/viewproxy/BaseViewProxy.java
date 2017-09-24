@@ -1,8 +1,6 @@
 package com.skocken.presentation.viewproxy;
 
 import android.app.Activity;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
@@ -21,23 +19,18 @@ import com.skocken.presentation.definition.Base;
  *
  * @param <P> the Presenter class that you want to use
  */
-public abstract class BaseViewProxy<P extends Base.IPresenter>
-        implements Base.IView, Base.LifecycleProvider {
+public abstract class BaseViewProxy<P extends Base.IPresenter> implements Base.IView {
 
     private final EfficientCacheView mCacheView;
 
     private P mPresenter;
 
-    private Lifecycle mLifecycle;
-
     public BaseViewProxy(Activity activity) {
         this(activity.findViewById(android.R.id.content));
-        setLifecycleFrom(activity);
     }
 
     public BaseViewProxy(Fragment fragment) {
         this(fragment.getView());
-        setLifecycleFrom(fragment);
     }
 
     public BaseViewProxy(View rootView) {
@@ -47,15 +40,6 @@ public abstract class BaseViewProxy<P extends Base.IPresenter>
         rootView.setTag(R.id.tag_view_proxy, this);
 
         onInit();
-    }
-
-    @Override
-    public Lifecycle getLifecycle() {
-        return mLifecycle;
-    }
-
-    public void setLifecycle(Lifecycle lifecycle) {
-        mLifecycle = lifecycle;
     }
 
     @NonNull
@@ -123,16 +107,6 @@ public abstract class BaseViewProxy<P extends Base.IPresenter>
      */
     public <T extends View> T findViewByIdEfficient(int parentId, int id) {
         return mCacheView.findViewByIdEfficient(parentId, id);
-    }
-
-    private void setLifecycleFrom(Object object) {
-        if (object instanceof Lifecycle) {
-            setLifecycle((Lifecycle) object);
-        } else if (object instanceof LifecycleOwner) {
-            setLifecycle(((LifecycleOwner) object).getLifecycle());
-        } else {
-            setLifecycle(null);
-        }
     }
 
 }

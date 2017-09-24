@@ -43,8 +43,4 @@ public interface Base {
 
         int getPosition();
     }
-
-    interface LifecycleProvider {
-        Lifecycle getLifecycle();
-    }
 }

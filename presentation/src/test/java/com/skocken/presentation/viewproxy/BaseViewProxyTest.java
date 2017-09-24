@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.view.View;
 
 import static org.mockito.Mockito.times;
@@ -38,6 +39,19 @@ public class BaseViewProxyTest extends TestCase {
         when(activity.findViewById(android.R.id.content)).thenReturn(rootView);
 
         BaseViewProxy baseViewProxy = new BaseViewProxy(activity) {
+        };
+
+        assertEquals("The view is not properly get from the Activity",
+                rootView, baseViewProxy.getRootView());
+    }
+
+    @Test
+    public void testConstructorFragmentShouldGetView() {
+        Fragment fragment = Mockito.mock(Fragment.class);
+        View rootView = Mockito.mock(View.class);
+        when(fragment.getView()).thenReturn(rootView);
+
+        BaseViewProxy baseViewProxy = new BaseViewProxy(fragment) {
         };
 
         assertEquals("The view is not properly get from the Activity",

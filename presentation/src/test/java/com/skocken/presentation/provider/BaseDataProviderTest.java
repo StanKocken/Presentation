@@ -24,13 +24,4 @@ public class BaseDataProviderTest extends TestCase {
     private static class TestDataProvider extends BaseDataProvider<TestDef.IPresenter> {
 
     }
-
-    private static class TestPresenter
-            extends BasePresenter<TestDef.IDataProvider, TestDef.IView>
-            implements TestDef.IPresenter {
-
-        private TestPresenter() {
-            super(null, null);
-        }
-    }
 }

@@ -20,7 +20,7 @@ public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
     public PresenterViewHolder(View itemView) {
         super(itemView);
         initController();
-        createItemPresenter();
+        setupPresenter();
     }
 
     @Override
@@ -32,7 +32,7 @@ public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
         // nothing to do by default
     }
 
-    protected abstract Class<P> getPresenterClass();
+    protected abstract Class<? extends P> getPresenterClass();
 
     protected P getPresenter() {
         return mPresenter;
@@ -43,13 +43,21 @@ public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
         mPresenter.updateView(context, object);
     }
 
-    private void createItemPresenter() {
+    protected void setupPresenter() {
+        initPresenter();
+        initViewProxy();
+    }
+
+    protected void initPresenter() {
         P presenter = createPresenter(getPresenterClass());
-        presenter.setView(this);
         setPresenter(presenter);
     }
 
-    private P createPresenter(Class<P> modelClass) {
+    protected void initViewProxy() {
+        mPresenter.setView(this);
+    }
+
+    P createPresenter(Class<? extends P> modelClass) {
         //noinspection TryWithIdenticalCatches
         try {
             return modelClass.newInstance();

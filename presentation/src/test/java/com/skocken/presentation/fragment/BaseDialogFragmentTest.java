@@ -1,6 +1,8 @@
-package com.skocken.presentation.activity;
+package com.skocken.presentation.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import com.skocken.presentation.definition.Base;
 import com.skocken.presentation.presenter.BasePresenter;
@@ -11,23 +13,24 @@ import junit.framework.TestCase;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
-public class BaseActivityTest extends TestCase {
+/**
+ * Created by stan on 24/09/2017.
+ */
+
+public class BaseDialogFragmentTest extends TestCase {
 
     private static final int CONTENT_VIEW = 123;
     private PresenterOwner mPresenterOwner;
-    private TestBaseActivity mUnderTest;
+    private TestBaseDialogFragment mUnderTest;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         mPresenterOwner = Mockito.mock(PresenterOwner.class);
-        mUnderTest = Mockito.spy(new TestBaseActivity());
+        mUnderTest = Mockito.spy(new TestBaseDialogFragment());
         mUnderTest.mPresenterOwner = mPresenterOwner;
-        doNothing().when(mUnderTest).setContentView(anyInt());
     }
 
     @Test
@@ -37,16 +40,26 @@ public class BaseActivityTest extends TestCase {
 
     @Test
     public void testOnCreate() {
-        Bundle bundle = new Bundle();
-        mUnderTest.onCreateDelegate(bundle);
-
+        mUnderTest.onCreateDelegate();
         verify(mPresenterOwner).createPresenter();
-        verify(mPresenterOwner).initViewProxy(bundle);
-        verify(mUnderTest).getContentView();
-        verify(mUnderTest).setContentView(CONTENT_VIEW);
     }
 
-    private static class TestBaseActivity extends BaseActivity {
+    @Test
+    public void testOnCreateView() {
+        LayoutInflater inflater = Mockito.mock(LayoutInflater.class);
+        ViewGroup container = Mockito.mock(ViewGroup.class);
+        mUnderTest.onCreateView(inflater, container, null);
+        verify(inflater).inflate(CONTENT_VIEW, container, false);
+    }
+
+    @Test
+    public void testOnViewCreated() {
+        Bundle bundle = new Bundle();
+        mUnderTest.onViewCreated(null, bundle);
+        verify(mPresenterOwner).initViewProxy(bundle);
+    }
+
+    public static class TestBaseDialogFragment extends BaseDialogFragment {
 
         @Override
         public int getContentView() {

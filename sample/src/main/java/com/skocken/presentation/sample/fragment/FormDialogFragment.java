@@ -1,5 +1,7 @@
 package com.skocken.presentation.sample.fragment;
 
+import android.os.Bundle;
+
 import com.skocken.presentation.fragment.BaseDialogFragment;
 import com.skocken.presentation.sample.R;
 import com.skocken.presentation.sample.presenter.FormPresenter;
@@ -8,17 +10,17 @@ import com.skocken.presentation.sample.viewproxy.FormViewProxy;
 public class FormDialogFragment extends BaseDialogFragment<FormPresenter, FormViewProxy> {
 
     @Override
-    protected int getContentView() {
+    public int getContentView() {
         return R.layout.include_form;
     }
 
     @Override
-    protected Class<FormPresenter> getPresenterClass() {
+    public Class<FormPresenter> getPresenterClass() {
         return FormPresenter.class;
     }
 
     @Override
-    protected FormViewProxy newViewProxy() {
+    public FormViewProxy newViewProxy(FormPresenter presenter, Bundle savedInstanceState) {
         return new FormViewProxy(this);
     }
 }
