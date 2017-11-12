@@ -95,7 +95,7 @@ Nothing special needed.
 
 ```
 dependencies {
-    compile 'com.skocken:presentation:2.0.0-alpha3'
+    compile 'com.skocken:presentation:2.0.0'
 }
 ```
 
