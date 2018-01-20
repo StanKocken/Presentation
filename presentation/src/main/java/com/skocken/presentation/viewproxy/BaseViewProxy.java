@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
@@ -21,19 +22,21 @@ import com.skocken.presentation.definition.Base;
  */
 public abstract class BaseViewProxy<P extends Base.IPresenter> implements Base.IView {
 
+    @NonNull
     private final EfficientCacheView mCacheView;
 
+    @Nullable
     private P mPresenter;
 
-    public BaseViewProxy(Activity activity) {
+    public BaseViewProxy(@NonNull Activity activity) {
         this(activity.findViewById(android.R.id.content));
     }
 
-    public BaseViewProxy(Fragment fragment) {
+    public BaseViewProxy(@NonNull Fragment fragment) {
         this(fragment.getView());
     }
 
-    public BaseViewProxy(View rootView) {
+    public BaseViewProxy(@NonNull View rootView) {
         mCacheView = createCacheView(rootView);
 
         // the view keep a reference on the view proxy
@@ -52,23 +55,29 @@ public abstract class BaseViewProxy<P extends Base.IPresenter> implements Base.I
     }
 
     @Override
-    public void setPresenter(Base.IPresenter presenter) {
+    public void setPresenter(@Nullable Base.IPresenter presenter) {
+        //noinspection unchecked
         mPresenter = (P) presenter;
     }
 
+    @Nullable
     public P getPresenter() {
         return mPresenter;
     }
 
+    @NonNull
     public <V extends View> V getRootView() {
+        //noinspection unchecked
         return (V) mCacheView.getView();
     }
 
+    @NonNull
     @Override
     public Context getContext() {
         return getRootView().getContext();
     }
 
+    @NonNull
     @Override
     public Resources getResources() {
         return getRootView().getResources();
@@ -98,6 +107,7 @@ public abstract class BaseViewProxy<P extends Base.IPresenter> implements Base.I
     /**
      * Helper for EfficientCacheView#findViewByIdEfficient(int)}
      */
+    @Nullable
     public <T extends View> T findViewByIdEfficient(int id) {
         return mCacheView.findViewByIdEfficient(id);
     }
@@ -105,6 +115,7 @@ public abstract class BaseViewProxy<P extends Base.IPresenter> implements Base.I
     /**
      * Helper for EfficientCacheView#findViewByIdEfficient(int, int)
      */
+    @Nullable
     public <T extends View> T findViewByIdEfficient(int parentId, int id) {
         return mCacheView.findViewByIdEfficient(parentId, id);
     }

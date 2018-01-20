@@ -1,6 +1,8 @@
 package com.skocken.presentation.viewholder;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.skocken.efficientadapter.lib.viewholder.EfficientViewHolder;
@@ -24,7 +26,8 @@ public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
     }
 
     @Override
-    public void setPresenter(Base.IPresenter presenter) {
+    public void setPresenter(@Nullable Base.IPresenter presenter) {
+        //noinspection unchecked
         mPresenter = (P) presenter;
     }
 
@@ -32,14 +35,16 @@ public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
         // nothing to do by default
     }
 
+    @NonNull
     protected abstract Class<? extends P> getPresenterClass();
 
+    @Nullable
     protected P getPresenter() {
         return mPresenter;
     }
 
     @Override
-    protected void updateView(Context context, T object) {
+    protected void updateView(@NonNull Context context, @Nullable T object) {
         mPresenter.updateView(context, object);
     }
 

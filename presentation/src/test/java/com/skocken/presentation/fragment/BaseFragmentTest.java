@@ -1,6 +1,7 @@
 package com.skocken.presentation.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -70,11 +71,13 @@ public class BaseFragmentTest extends TestCase {
             return CONTENT_VIEW;
         }
 
+        @NonNull
         @Override
         public Class getPresenterClass() {
             return BasePresenter.class;
         }
 
+        @NonNull
         @Override
         public Base.IView newViewProxy(BasePresenter presenter, Bundle savedInstanceState) {
             return Mockito.mock(Base.IView.class);

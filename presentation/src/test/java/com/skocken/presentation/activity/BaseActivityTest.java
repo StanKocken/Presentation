@@ -1,6 +1,7 @@
 package com.skocken.presentation.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.skocken.presentation.definition.Base;
 import com.skocken.presentation.presenter.BasePresenter;
@@ -53,11 +54,13 @@ public class BaseActivityTest extends TestCase {
             return CONTENT_VIEW;
         }
 
+        @NonNull
         @Override
         public Class getPresenterClass() {
             return BasePresenter.class;
         }
 
+        @NonNull
         @Override
         public Base.IView newViewProxy(BasePresenter presenter, Bundle savedInstanceState) {
             return Mockito.mock(Base.IView.class);

@@ -3,6 +3,7 @@ package com.skocken.presentation.viewholder;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.skocken.presentation.definition.Base;
@@ -127,6 +128,7 @@ public class PresenterViewHolderTest extends TestCase {
             super(itemView);
         }
 
+        @NonNull
         @Override
         protected Class<? extends TestItemDef.IItemPresenter> getPresenterClass() {
             return TestItemPresenter.class;
@@ -138,7 +140,7 @@ public class PresenterViewHolderTest extends TestCase {
             implements TestItemDef.IItemPresenter {
 
         @Override
-        public void updateView(Context context, TestObject object) {
+        public void updateView(@NonNull Context context, @NonNull TestObject object) {
             // no-op
         }
     }
@@ -166,7 +168,7 @@ public class PresenterViewHolderTest extends TestCase {
         }
 
         @Override
-        public void updateView(Context context, TestObject object) {
+        public void updateView(@NonNull Context context, @NonNull TestObject object) {
 
         }
     }

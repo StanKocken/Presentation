@@ -32,7 +32,7 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
     public BasePresenter() {
     }
 
-    public void setProvider(D provider) {
+    public void setProvider(@Nullable D provider) {
         if (mProvider == provider) {
             return; // no changes
         }
@@ -44,10 +44,11 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
     }
 
     @Override
-    public void setView(Base.IView view) {
+    public void setView(@Nullable Base.IView view) {
         if (mView == view) {
             return; // no changes
         }
+        //noinspection unchecked
         mView = (V) view;
         if (mView != null) {
             mView.setPresenter(this);
@@ -55,6 +56,7 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
         onViewChanged();
     }
 
+    @Nullable
     @Override
     public Activity getActivity() {
         Context context = getContext();
@@ -73,6 +75,7 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
         return null;
     }
 
+    @Nullable
     @Override
     public Context getContext() {
         if (mView == null) {
@@ -82,6 +85,7 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
         }
     }
 
+    @Nullable
     @Override
     public Resources getResources() {
         if (mView == null) {
@@ -91,10 +95,12 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
         }
     }
 
+    @Nullable
     protected D getProvider() {
         return mProvider;
     }
 
+    @Nullable
     protected V getView() {
         return mView;
     }

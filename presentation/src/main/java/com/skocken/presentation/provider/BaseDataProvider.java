@@ -1,5 +1,7 @@
 package com.skocken.presentation.provider;
 
+import android.support.annotation.Nullable;
+
 import com.skocken.presentation.definition.Base;
 
 /**
@@ -12,10 +14,12 @@ public abstract class BaseDataProvider<P extends Base.IPresenter> implements Bas
     private P mPresenter;
 
     @Override
-    public void setPresenter(Base.IPresenter presenter) {
+    public void setPresenter(@Nullable Base.IPresenter presenter) {
+        //noinspection unchecked
         mPresenter = (P) presenter;
     }
 
+    @Nullable
     public P getPresenter() {
         return mPresenter;
     }
