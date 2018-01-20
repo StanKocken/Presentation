@@ -1,7 +1,7 @@
 Change Log
 ===============================================================================
 
-Version 2.0.1 *(2018-01-20)*
+Version 2.0.2 *(2018-01-20)*
 
 * Improve compatibility with Kotlin (Null annotations, reserved keywords…)
 * Update Support Library to "27.0.2"

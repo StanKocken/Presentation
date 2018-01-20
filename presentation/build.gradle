@@ -36,7 +36,7 @@ dependencies {
     // dependencies
     compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
 
-    compile ("com.skocken:efficientadapter:2.2.2") {
+    compile ("com.skocken:efficientadapter:2.2.3") {
         exclude group: 'com.android.support' // don't check the Android support version, use ours
     }
     // the recycler view require for efficient adapter as it has been exclude
