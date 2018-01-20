@@ -1,10 +1,14 @@
 Change Log
 ===============================================================================
 
-Version 2.0.0-beta1 *(2016-10-01)*
+Version 2.0.1 *(2018-01-20)*
 
-* Remove lifecycle management from the library. Because the MVP can be attached as well to a View, it didn't make test to keep it.
-* Update ViewModel to "1.0.0-beta1" with Support Library "26.1.0"
+* Improve compatibility with Kotlin (Null annotations, reserved keywords…)
+* Update Support Library to "27.0.2"
+
+Version 2.0.0 *(2017-11-12)*
+
+* Release 2.0.0
 
 ----------------------------
 
