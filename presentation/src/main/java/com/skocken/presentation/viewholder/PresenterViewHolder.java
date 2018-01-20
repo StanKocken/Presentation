@@ -44,8 +44,8 @@ public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
     }
 
     @Override
-    protected void updateView(@NonNull Context context, @Nullable T object) {
-        mPresenter.updateView(context, object);
+    protected void updateView(@NonNull Context context, @Nullable T item) {
+        mPresenter.updateView(context, item);
     }
 
     protected void setupPresenter() {

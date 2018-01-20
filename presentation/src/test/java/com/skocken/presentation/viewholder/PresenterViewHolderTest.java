@@ -140,7 +140,7 @@ public class PresenterViewHolderTest extends TestCase {
             implements TestItemDef.IItemPresenter {
 
         @Override
-        public void updateView(@NonNull Context context, @NonNull TestObject object) {
+        public void updateView(@NonNull Context context, @NonNull TestObject item) {
             // no-op
         }
     }
@@ -168,7 +168,7 @@ public class PresenterViewHolderTest extends TestCase {
         }
 
         @Override
-        public void updateView(@NonNull Context context, @NonNull TestObject object) {
+        public void updateView(@NonNull Context context, @NonNull TestObject item) {
 
         }
     }

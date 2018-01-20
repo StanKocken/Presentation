@@ -25,7 +25,7 @@ public interface Base {
 
     interface IItemPresenter<T> extends IPresenter {
 
-        void updateView(@NonNull Context context, @Nullable T object);
+        void updateView(@NonNull Context context, @Nullable T item);
     }
 
     interface IDataProvider {
