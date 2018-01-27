@@ -95,14 +95,68 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
         }
     }
 
-    @Nullable
+    /**
+     * Get the Provider previously provided.
+     *
+     * Note: this method is marked as @NonNull, so if you did not provide any provider before this
+     * will crash right away in Kotlin, or later in your code in Java.
+     * To be safer, you should either check the current status with {@link #isProviderAttached()}
+     * or use the @Nullable method {@link #getProviderOrNull()}.
+     *
+     * @return the provider previously provided.
+     */
+    @NonNull
     protected D getProvider() {
         return mProvider;
     }
 
+    /**
+     * Get the Provider if previously provided.
+     *
+     * @return the provider previously provided or null if not set
+     */
     @Nullable
+    protected D getProviderOrNull() {
+        return mProvider;
+    }
+
+    /**
+     * @return true if a Provider has been previously set
+     */
+    protected boolean isProviderAttached() {
+        return mProvider != null;
+    }
+
+    /**
+     * Get the View previously provided.
+     *
+     * Note: this method is marked as @NonNull, so if you did not provide any provider before this
+     * will crash right away in Kotlin, or later in your code in Java.
+     * To be safer, you should either check the current status with {@link #isViewAttached()}
+     * or use the @Nullable method {@link #getViewOrNull()}.
+     *
+     * @return the view previously provided.
+     */
+    @NonNull
     protected V getView() {
         return mView;
+    }
+
+    /**
+     * Get the View if previously provided.
+     *
+     * @return the view previously provided or null if not set
+     */
+    @Nullable
+    protected V getViewOrNull() {
+        return mView;
+    }
+
+    /**
+     * @return true if a View has been previously set
+     */
+    protected boolean isViewAttached() {
+        return mView != null;
     }
 
     protected void onViewChanged() {
