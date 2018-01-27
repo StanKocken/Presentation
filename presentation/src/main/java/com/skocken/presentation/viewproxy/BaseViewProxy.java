@@ -56,8 +56,12 @@ public abstract class BaseViewProxy<P extends Base.IPresenter> implements Base.I
 
     @Override
     public void setPresenter(@Nullable Base.IPresenter presenter) {
+        if(mPresenter == presenter) {
+            return;
+        }
         //noinspection unchecked
         mPresenter = (P) presenter;
+        onPresenterChanged();
     }
 
     /**
@@ -145,6 +149,13 @@ public abstract class BaseViewProxy<P extends Base.IPresenter> implements Base.I
     @Nullable
     public <T extends View> T findViewByIdEfficient(int parentId, int id) {
         return mCacheView.findViewByIdEfficient(parentId, id);
+    }
+
+    /**
+     * Called whenever the Presenter has been changed
+     */
+    protected void onPresenterChanged() {
+        // nothing by default
     }
 
 }

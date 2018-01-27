@@ -27,8 +27,12 @@ public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
 
     @Override
     public void setPresenter(@Nullable Base.IPresenter presenter) {
+        if(mPresenter == presenter) {
+            return;
+        }
         //noinspection unchecked
         mPresenter = (P) presenter;
+        onPresenterChanged();
     }
 
     protected void initController() {
@@ -87,6 +91,13 @@ public abstract class PresenterViewHolder<T, P extends Base.IItemPresenter<T>>
 
     protected void initViewProxy() {
         mPresenter.setView(this);
+    }
+
+    /**
+     * Called whenever the Presenter has been changed
+     */
+    protected void onPresenterChanged() {
+        // nothing by default
     }
 
     P createPresenter(Class<? extends P> modelClass) {
