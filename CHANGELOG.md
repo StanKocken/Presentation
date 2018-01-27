@@ -1,6 +1,13 @@
 Change Log
 ===============================================================================
 
+Version 2.1.1 *(2018-01-27)*
+
+* Changed Null safety on getters for BasePresenter.
+<br />Now the `getView()` from the BasePresenter declares itself as `@NonNull` which will crash on Kotlin if it's not the case, as it should.
+<br />A new method `getViewOrNull()`, with the annotation `@Nullable` has been introduced to let you check it before using it.
+<br />This can be a breaking change for some Kotlin project.
+
 Version 2.0.2 *(2018-01-20)*
 
 * Improve compatibility with Kotlin (Null annotations, reserved keywords…)
