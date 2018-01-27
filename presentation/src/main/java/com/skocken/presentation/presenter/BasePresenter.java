@@ -1,9 +1,6 @@
 package com.skocken.presentation.presenter;
 
 import android.app.Activity;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -32,11 +29,12 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
     public BasePresenter() {
     }
 
-    public void setProvider(@Nullable D provider) {
+    public void setProvider(@Nullable Base.IDataProvider provider) {
         if (mProvider == provider) {
             return; // no changes
         }
-        mProvider = provider;
+        //noinspection unchecked
+        mProvider = (D) provider;
         if (mProvider != null) {
             mProvider.setPresenter(this);
         }
@@ -99,7 +97,7 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
 
     /**
      * Get the Provider previously provided.
-     *
+     * <p>
      * Note: this method is marked as @NonNull, so if you did not provide any provider before this
      * will crash right away in Kotlin, or later in your code in Java.
      * To be safer, you should either check the current status with {@link #isProviderAttached()}
@@ -131,7 +129,7 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
 
     /**
      * Get the View previously provided.
-     *
+     * <p>
      * Note: this method is marked as @NonNull, so if you did not provide any provider before this
      * will crash right away in Kotlin, or later in your code in Java.
      * To be safer, you should either check the current status with {@link #isViewAttached()}
