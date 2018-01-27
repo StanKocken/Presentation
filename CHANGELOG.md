@@ -1,6 +1,11 @@
 Change Log
 ===============================================================================
 
+Version 2.2.0 *(2018-01-27)*
+
+* `setProvider()` on the `BasePresenter` now require a generic `Base.IDataProvider`, like any other setPresenter/setView.
+<br />Change require for a better compatibility in Kotlin
+
 Version 2.1.1 *(2018-01-27)*
 
 * Changed Null safety on getters for BasePresenter.
