@@ -41,6 +41,7 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
             mProvider.setPresenter(this);
         }
         onProviderChanged();
+        onViewOrProviderChanged();
     }
 
     @Override
@@ -54,6 +55,7 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
             mView.setPresenter(this);
         }
         onViewChanged();
+        onViewOrProviderChanged();
     }
 
     @Nullable
@@ -164,6 +166,10 @@ public abstract class BasePresenter<D extends Base.IDataProvider, V extends Base
     }
 
     protected void onProviderChanged() {
+        // nothing by default
+    }
+
+    protected void onViewOrProviderChanged() {
         // nothing by default
     }
 }
