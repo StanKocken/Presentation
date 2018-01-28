@@ -103,7 +103,7 @@ Nothing special needed.
 
 ```
 dependencies {
-    compile 'com.skocken:presentation:2.0.2'
+    compile 'com.skocken:presentation:2.3.0'
 }
 ```
 
