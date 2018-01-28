@@ -52,11 +52,16 @@ public abstract class BaseFragment<P extends BasePresenter, V extends Base.IView
         return mPresenterOwner.getPresenter();
     }
 
+    protected void onPresenterSetup(@NonNull P presenter) {
+        // nothing to do
+    }
+
     void onCreateDelegate() {
         mPresenterOwner.createPresenter();
     }
 
     void onViewCreatedDelegate(@Nullable Bundle savedInstanceState) {
         mPresenterOwner.initViewProxy(savedInstanceState);
+        onPresenterSetup(mPresenterOwner.getPresenter());
     }
 }

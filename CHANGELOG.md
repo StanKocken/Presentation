@@ -1,6 +1,10 @@
 Change Log
 ===============================================================================
 
+Version 2.3.0 *(2018-01-28)*
+
+* Added method `onPresenterSetup()` on the `BaseActivity`, `BaseFragment` and  `BaseDialogFragment`. Make it easier to setup the DataProvider if require.
+
 Version 2.2.0 *(2018-01-27)*
 
 * `setProvider()` on the `BasePresenter` now require a generic `Base.IDataProvider`, like any other setPresenter/setView.
