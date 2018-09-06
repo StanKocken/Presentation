@@ -1,6 +1,10 @@
 Change Log
 ===============================================================================
 
+Version 2.4.0 *(2018-09-06)*
+
+* Update support libraries
+
 Version 2.3.0 *(2018-01-28)*
 
 * Added method `onPresenterSetup()` on the `BaseActivity`, `BaseFragment` and  `BaseDialogFragment`. Make it easier to setup the DataProvider if require.
