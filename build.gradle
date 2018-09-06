@@ -13,7 +13,7 @@ ext {
     MOCKITO_VERSION = "1.10.19"
     ROBOLECTRIC_VERSION = "3.0"
     ANDROID_SUPPORT_VERSION = "27.1.1"
-    ANDROID_ARCH_LIFECYCLE_VERSION = "1.1.0"
+    ANDROID_ARCH_LIFECYCLE_VERSION = "1.1.1"
 }
 
 buildscript {
@@ -24,7 +24,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.4'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
 
