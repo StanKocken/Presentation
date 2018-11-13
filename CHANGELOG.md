@@ -1,6 +1,10 @@
 Change Log
 ===============================================================================
 
+Version 2.4.1 *(2018-11-13)*
+
+* Update dependencies
+
 Version 2.4.0 *(2018-09-06)*
 
 * Update support libraries
