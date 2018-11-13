@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
-    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion MIN_SDK_VERSION
@@ -36,7 +35,7 @@ dependencies {
     // dependencies
     compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
 
-    compile ("com.skocken:efficientadapter:2.3.0") {
+    compile ("com.skocken:efficientadapter:2.3.1") {
         exclude group: 'com.android.support' // don't check the Android support version, use ours
     }
     // the recycler view require for efficient adapter as it has been exclude
