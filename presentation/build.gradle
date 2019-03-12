@@ -25,21 +25,22 @@ android {
 
 dependencies {
     // tests
-    testCompile "junit:junit:${JUNIT_VERSION}"
-    testCompile "org.mockito:mockito-core:${ MOCKITO_VERSION}"
-    testCompile "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+    testImplementation "junit:junit:${JUNIT_VERSION}"
+    testImplementation "org.mockito:mockito-core:${MOCKITO_VERSION}"
+    testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
 
-    compile "android.arch.lifecycle:extensions:${ANDROID_ARCH_LIFECYCLE_VERSION}"
+    implementation "android.arch.lifecycle:extensions:${ANDROID_ARCH_LIFECYCLE_VERSION}"
     annotationProcessor "android.arch.lifecycle:compiler:${ANDROID_ARCH_LIFECYCLE_VERSION}"
 
     // dependencies
-    compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
+    implementation "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
+    implementation "com.android.support:support-annotations:${ANDROID_SUPPORT_VERSION}"
 
-    compile ("com.skocken:efficientadapter:2.3.1") {
+    implementation("com.skocken:efficientadapter:2.3.1") {
         exclude group: 'com.android.support' // don't check the Android support version, use ours
     }
     // the recycler view require for efficient adapter as it has been exclude
-    compile "com.android.support:recyclerview-v7:${ANDROID_SUPPORT_VERSION}"
+    implementation "com.android.support:recyclerview-v7:${ANDROID_SUPPORT_VERSION}"
 }
 
 apply from: '../gradle_script/installv1.gradle'
