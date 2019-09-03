@@ -103,9 +103,13 @@ Nothing special needed.
 
 ```
 dependencies {
-    compile 'com.skocken:presentation:2.4.1'
+    compile 'com.skocken:presentation:2.5.0'
 }
 ```
+
+## Android Support library
+
+If you are still using the deprecated Android Support Library (instead of AndroidX), please use the dependency 2.4.X instead.
 
 ## License
 
