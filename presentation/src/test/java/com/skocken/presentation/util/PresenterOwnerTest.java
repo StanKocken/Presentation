@@ -1,6 +1,6 @@
 package com.skocken.presentation.util;
 
-import android.arch.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 
 import com.skocken.presentation.definition.Base;

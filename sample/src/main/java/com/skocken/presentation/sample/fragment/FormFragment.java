@@ -1,7 +1,7 @@
 package com.skocken.presentation.sample.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.skocken.presentation.fragment.BaseFragment;
 import com.skocken.presentation.sample.R;

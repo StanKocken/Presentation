@@ -25,21 +25,19 @@ android {
 
 dependencies {
     // tests
-    testCompile "junit:junit:${JUNIT_VERSION}"
-    testCompile "org.mockito:mockito-core:${ MOCKITO_VERSION}"
-    testCompile "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+    testImplementation "junit:junit:${JUNIT_VERSION}"
+    testImplementation "org.mockito:mockito-core:${ MOCKITO_VERSION}"
+    testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
 
-    compile "android.arch.lifecycle:extensions:${ANDROID_ARCH_LIFECYCLE_VERSION}"
-    annotationProcessor "android.arch.lifecycle:compiler:${ANDROID_ARCH_LIFECYCLE_VERSION}"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0'
 
     // dependencies
-    compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
 
-    compile ("com.skocken:efficientadapter:2.3.1") {
-        exclude group: 'com.android.support' // don't check the Android support version, use ours
-    }
+    api ("com.skocken:efficientadapter:2.4.0")
     // the recycler view require for efficient adapter as it has been exclude
-    compile "com.android.support:recyclerview-v7:${ANDROID_SUPPORT_VERSION}"
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
 
 apply from: '../gradle_script/installv1.gradle'

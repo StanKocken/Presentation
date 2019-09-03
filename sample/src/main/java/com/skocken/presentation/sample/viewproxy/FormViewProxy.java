@@ -5,7 +5,7 @@ import com.skocken.presentation.sample.definition.FormDef;
 import com.skocken.presentation.viewproxy.BaseViewProxy;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;

@@ -1,12 +1,10 @@
 package com.skocken.presentation.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.skocken.presentation.activity.BaseActivity;
-import com.skocken.presentation.activity.BaseActivityTest;
 import com.skocken.presentation.definition.Base;
 import com.skocken.presentation.presenter.BasePresenter;
 import com.skocken.presentation.util.PresenterOwner;
@@ -16,8 +14,6 @@ import junit.framework.TestCase;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
 /**

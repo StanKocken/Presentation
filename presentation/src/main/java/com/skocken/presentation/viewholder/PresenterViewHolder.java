@@ -1,8 +1,8 @@
 package com.skocken.presentation.viewholder;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.View;
 
 import com.skocken.efficientadapter.lib.viewholder.EfficientViewHolder;

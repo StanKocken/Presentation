@@ -1,7 +1,7 @@
 package com.skocken.presentation.sample.activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.skocken.presentation.activity.BaseActivity;
 import com.skocken.presentation.sample.R;

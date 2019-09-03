@@ -3,7 +3,7 @@ package com.skocken.presentation.viewholder;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 
 import com.skocken.presentation.definition.Base;
